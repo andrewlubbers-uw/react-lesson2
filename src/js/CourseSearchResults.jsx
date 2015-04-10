@@ -1,5 +1,7 @@
 'use strict';
 
+var CourseAPI = require('./lib/CourseAPI');
+
 /**
  * A row component for the table component below.
  */
@@ -29,23 +31,13 @@ var CourseSearchResults = React.createClass({
     handleSortClick: function(column) {
         //  Calling setState causes the component to rerender.
         this.setState({"sortColumn": column});
+        this.props.forceUpdate();
     },
 
-    handleDeleteClick: function(code) {
-        var data = this.props.data;
-        var index = -1;
-        // Look for row with the given code and remove it.
-        for (var i = 0; i < data.length; i++) {
-            if (data[i].code == code) {
-                index = i;
-                data.splice(index, 1);
-                break;
-            }
-        }
-        if (index > -1) {
-            //  Tell component to re-render. Can't call setState() here because the state didn't change.
-            this.forceUpdate();
-        }
+    handleDeleteClick: function(id) {
+        var courses = this.props.courses;
+        CourseAPI.deleteCourse(id);
+        this.props.forceUpdate();
     },
 
     /* Sort the given array of objects by the given property */
@@ -78,8 +70,8 @@ var CourseSearchResults = React.createClass({
             <thead>
               <tr>
                   <th onClick={this.handleSortClick.bind(this, "code")}>Code</th>
+                  <th onClick={this.handleSortClick.bind(this, "title")}>Title</th>
                   <th>Credits</th>
-                  <th onClick={this.handleSortClick.bind(this, "name")}>Title</th>
                   <th>Actions</th>
               </tr>
             </thead>

@@ -32,6 +32,10 @@ var CourseSearch = React.createClass({
         this.setState(newState);
     },
 
+    doUpdate: function() {
+      this.forceUpdate();
+    },
+
     render: function() {
         //  Note: We aren't putting the search result in component state.
         var courses = CourseAPI.findCourses(this.state.searchString);
@@ -41,7 +45,7 @@ var CourseSearch = React.createClass({
          */
         var resultsComponent = null;
         if (courses.length > 0) {
-          resultsComponent = <CourseSearchResults courses={courses}/>;
+          resultsComponent = <CourseSearchResults courses={courses} forceUpdate={this.doUpdate} />;
         } else {
           if (this.state.hasPerformedSearch) {
             resultsComponent = <span>Your query produced no results.</span>

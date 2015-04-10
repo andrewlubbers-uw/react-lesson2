@@ -124,6 +124,16 @@ module.exports = {
         return(course);
     },
 
+    deleteCourse: function(id) {
+        for (var i = 0; i < _courses.length; i++) {
+            if (_courses[i].id == id) {
+                index = i;
+                _courses.splice(index, 1);
+                break;
+            }
+        }
+    },
+
     /*
      * Performs a search for courses.
      */
