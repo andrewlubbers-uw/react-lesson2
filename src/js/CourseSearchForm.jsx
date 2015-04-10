@@ -20,10 +20,8 @@ var CourseSearchForm = React.createClass({
           <form className="courseSearchForm" onSubmit={this.handleSubmit}>
               <div>
                   <div>
-                      <div>
-                          <input type="text" placeholder="Search..." ref="searchString" />
-                          <input type="submit" value="Search" className="button" />
-                      </div>
+                      <input type="text" placeholder="Search..." ref="searchString" />
+                      <input type="submit" value="Search" className="button" />
                   </div>
               </div>
           </form>

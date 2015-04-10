@@ -55,8 +55,10 @@ var CourseSearchResults = React.createClass({
     },
 
     render: function() {
+
         var sortColumn = this.state.sortColumn;
-        var courses = this.props.courses;
+        var courses = CourseAPI.findCourses(this.props.searchString);
+
         this._sort(courses, sortColumn);
 
         //  Create the rows for the table
