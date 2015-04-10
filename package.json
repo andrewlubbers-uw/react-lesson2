@@ -1,0 +1,19 @@
+{
+  "name": "react-lesson2",
+  "version": "0.0.1",
+  "description": "Learning React Lesson 2. Dealing with forms.",
+  "dependencies": {
+    "flux": "^2.0.0",
+    "jsx-loader": "^0.12.2",
+    "react": "^0.12.2"
+  },
+  "devDependencies": {
+    "del": "^1.1.1",
+    "gulp": "^3.8.8",
+    "gulp-livereload": "^3.4.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-util": "^3.0.2",
+    "gulp-webpack": "^1.2.0",
+    "gulp-concat": "~2.5.2"
+  }
+}

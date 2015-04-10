@@ -1,0 +1,32 @@
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid black;
+}
+
+th {
+    cursor: pointer;
+}
+
+.app_header {
+  margin: 1em .5em;
+  border: 1px solid black;
+  background: #cccccc;
+}
+
+.app_header h2,
+.app_footer span {
+  margin-left: .5em;
+}
+
+.app_footer {
+  margin: 1em .5em;
+  border: 1px solid black;
+  background: #cccccc;
+}
+
+.courseSearchForm, .courseSearchResults {
+  margin: .5em;
+}
