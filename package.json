@@ -1,7 +1,7 @@
 {
   "name": "react-lesson2",
   "version": "0.0.1",
-  "description": "Learning React Lesson 2. Dealing with forms.",
+  "description": "Learning React Lesson 2.",
   "dependencies": {
     "flux": "^2.0.0",
     "jsx-loader": "^0.12.2",
