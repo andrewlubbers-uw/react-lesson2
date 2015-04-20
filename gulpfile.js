@@ -7,8 +7,9 @@ var rename = require('gulp-rename');
 var del = require('del');
 
 var buildDir = "build";
-var jsDir = buildDir + "/js";
-var cssDir = buildDir + "/css";
+var webRoot = buildDir + "/webroot";
+var jsDir = webRoot + "/js";
+var cssDir = webRoot + "/css";
 
 /*
  * Removes the build directory.
@@ -31,6 +32,14 @@ gulp.task('css', function() {
 });
 
 /*
+ * Copies everything in assets to webroot in the build directory.
+ */
+gulp.task('assets', function() {
+    return gulp.src('src/assets/**/*')
+        .pipe(gulp.dest(webRoot));
+});
+
+/*
  * Copies scripts to the build directory.
  */
 gulp.task('scripts', function() {
@@ -46,11 +55,12 @@ gulp.task('scripts', function() {
 gulp.task('watch', function() {
     livereload.listen();
     gulp.watch('src/js/**/*.jsx', ['scripts']);
-    gulp.watch('src/js/**/*.js', ['scripts']);  
+    gulp.watch('src/js/**/*.js', ['scripts']);
     gulp.watch('src/css/**/*.css', ['css']);
+    gulp.watch('src/assets/**/*', ['assets']);
 });
 
 /**
  * Define the default target.
  */
-gulp.task('default', ['scripts', 'css']);
+gulp.task('default', ['scripts', 'css', 'assets']);

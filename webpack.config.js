@@ -4,7 +4,7 @@
 module.exports = {
     module: {
         loaders: [
-            {test: /\.(jsx|js)$/, loader: 'jsx-loader' },
+            {test: /\.(jsx|js)$/, loader: 'jsx-loader?harmony' },
             {test: /\.(png|jpg|gif)$/, loader: 'url-loader?limit=8192'}
         ]
     },

@@ -1,6 +1,7 @@
 'use strict';
 
-var CourseAPI = require('./lib/CourseAPI');
+var CourseStore = require('../flux/CourseStore');
+var CourseActions = require('../flux/CourseActions');
 
 var CourseSearchResults = require('./CourseSearchResults');
 var CourseSearchForm = require('./CourseSearchForm');
@@ -11,8 +12,8 @@ var CourseSearchForm = require('./CourseSearchForm');
 var CourseSearch = React.createClass({
     getInitialState: function() {
       return({
-        "searchString": "",
-        "hasPerformedSearch": false
+          "searchString": "",
+          "hasPerformedSearch": false
       });
     },
 
@@ -26,19 +27,22 @@ var CourseSearch = React.createClass({
 
         //  If the user has never performed a search the set the performed search flag to true.
         if (! this.state.hasPerformedSearch) {
-          newState = React.addons.update(newState, {"hasPerformedSearch": {$set: true}});
+            newState = React.addons.update(newState, {"hasPerformedSearch": {$set: true}});
         }
 
         this.setState(newState);
+        
+        //  Perform the search
+        CourseActions.findCourses(searchString);
     },
 
     _forceUpdate: function() {
-      this.forceUpdate();
+        this.forceUpdate();
     },
 
     render: function() {
-        //  Perform the search.
-        var courses = CourseAPI.findCourses(this.state.searchString);
+        //  Fetch search results.
+        var courses = CourseStore.getCourseSearchResults();
 
         /*
          * Conditionally render the results component based on whether there are
@@ -46,18 +50,18 @@ var CourseSearch = React.createClass({
          */
         var resultsComponent = null;
         if (courses.length > 0) {
-          resultsComponent = <CourseSearchResults courses={courses} forceUpdate={this._forceUpdate} />;
+            resultsComponent = <CourseSearchResults courses={courses} forceUpdate={this._forceUpdate} />;
         } else {
-          if (this.state.hasPerformedSearch) {
-            resultsComponent = <span>Your query produced no results.</span>
-          }
+            if (this.state.hasPerformedSearch) {
+                resultsComponent = <span>Your query produced no results.</span>
+            }
         }
 
         return(
-          <div>
-            <CourseSearchForm onCourseSearch={this.performCourseSearch} />
-            <div className="courseSearchResults">{resultsComponent}</div>
-          </div>);
+            <div>
+                <CourseSearchForm onCourseSearch={this.performCourseSearch} />
+                <div className="courseSearchResults">{resultsComponent}</div>
+            </div>);
     }
 });
 

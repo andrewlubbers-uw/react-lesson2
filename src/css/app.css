@@ -1,3 +1,7 @@
+a {
+    text-decoration: none;
+}
+
 table {
     border-collapse: collapse;
 }
@@ -10,8 +14,13 @@ th {
     cursor: pointer;
 }
 
+/* Header / Footer */
+
+.app_header, .app_footer, .app_content {
+    margin: 1em .5em;
+}
+
 .app_header {
-  margin: 1em .5em;
   border: 1px solid black;
   background: #cccccc;
 }
@@ -22,11 +31,53 @@ th {
 }
 
 .app_footer {
-  margin: 1em .5em;
   border: 1px solid black;
   background: #cccccc;
 }
 
+/* Create Course Form */
 .courseSearchForm, .courseSearchResults {
   margin: .5em;
+}
+
+.createCourseForm label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.createCourseForm label .rf-Hint {
+    color: #999;
+    display: block;
+    font-weight: normal;
+}
+
+.inputField {
+    margin-bottom: 5px;
+}
+
+.inputField textarea {
+    width: 500;
+    height: 80;
+}
+
+/* Subnav */
+.subnav {
+  background: #cccccc;
+  border: 1px solid black;
+}
+
+/* Subnav */
+.subnav a {
+    margin-left: 5px;
+    margin-right: 10px;
+    padding: 2px;
+    color: #777777;
+}
+.subnav a.active {
+    color: black;
+    background: white;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-radius: 5px 5px 0px 0px;
 }

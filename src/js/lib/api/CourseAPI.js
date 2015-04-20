@@ -1,3 +1,7 @@
+'use strict';
+
+var Utils = require('../utils/Utils');
+
 var _courses = [
     {
         "id": "c1",
@@ -114,7 +118,7 @@ module.exports = {
      * This returns a course given an id.
      */
     getCourse: function(id) {
-        var course = {};
+        var course = null;
         for (var i = 0; i < _courses.length; i++) {
             if (_courses[i].id == id) {
                 course = _courses[i];
@@ -127,8 +131,7 @@ module.exports = {
     deleteCourse: function(id) {
         for (var i = 0; i < _courses.length; i++) {
             if (_courses[i].id == id) {
-                index = i;
-                _courses.splice(index, 1);
+                _courses.splice(i, 1);
                 break;
             }
         }
@@ -146,13 +149,33 @@ module.exports = {
         if (_matches(course.title, serachString) ||
             _matches(course.subjectCode, serachString) ||
             _matches(course.courseNumber, serachString)) {
-          courses.push(course);
+                courses.push(course);
         }
       }
       return(courses);
     },
 
+    /*
+     * Creates or updates a course.
+     */
     saveCourse: function(course) {
-        //  Not sure what this one should return. Validation messages? Void or throw?
+        var updatedCourse = null;
+        var existingCourse = this.getCourse(course.id);
+        if (existingCourse) {
+            for (var i = 0; i < _courses.length; i++) {
+                var c = _courses[i];
+                //  If the
+                if (existingCourse.id === c.id) {
+                    //  First, validate the course, then replace it ...
+                    _courses[i] = course;
+                    updatedCourse = course;
+                }
+            }
+        } else {
+            course.id = Utils.guid();
+            _courses.push(course);
+            updatedCourse = course;
+        }
+        return updatedCourse;
     }
 };

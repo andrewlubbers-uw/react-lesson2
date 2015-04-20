@@ -17,14 +17,10 @@ var CourseSearchForm = React.createClass({
     },
     render: function() {
         return (
-          <form className="courseSearchForm" onSubmit={this.handleSubmit}>
-              <div>
-                  <div>
-                      <input type="text" placeholder="Search..." ref="searchString" />
-                      <input type="submit" value="Search" className="button" />
-                  </div>
-              </div>
-          </form>
+            <form className="courseSearchForm" onSubmit={this.handleSubmit}>
+                <input type="text" placeholder="Search..." ref="searchString" />
+                <input type="submit" value="Search" className="button" />     
+            </form>
         );
     }
 });

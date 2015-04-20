@@ -1,6 +1,8 @@
 'use strict';
 
-var CourseAPI = require('./lib/CourseAPI');
+var { Link } = require('react-router');
+
+var CourseActions = require('../flux/CourseActions');
 
 /**
  * A row component for the table component below.
@@ -13,7 +15,11 @@ var Row = React.createClass({
                 <td>{courseModel.subjectCode} {courseModel.courseNumber}</td>
                 <td title={courseModel.description}>{courseModel.title}</td>
                 <td>{courseModel.credits}</td>
-                <th onClick={this.props.deleteClickHandler} title="Delete this row">X</th>
+                <td>
+                    <span onClick={this.props.deleteClickHandler} title="Delete this course">X</span>
+                    <span> </span>
+                    <Link to="courseUpdate" params={{courseId: courseModel.id}} title="See course details">?</Link>
+                </td>
             </tr>);
     }
 });
@@ -36,8 +42,8 @@ var CourseSearchResults = React.createClass({
 
     handleDeleteClick: function(id) {
         var courses = this.props.courses;
-        CourseAPI.deleteCourse(id);
-        this.props.forceUpdate();
+        CourseActions.deleteCourse(id);
+        //this.props.forceUpdate();
     },
 
     /* Sort the given array of objects by the given property */
