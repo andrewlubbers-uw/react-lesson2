@@ -11,7 +11,7 @@ var _ = require('underscore');
 //  Storage
 var _course = {};
 var _courses = [];
-var _activeComponent = {activeComponent: Constants.COURSE_SEARCH_COMPONENT};
+var _searchString = "";
 
 // Register callback with AppDispatcher
 AppDispatcher.register(function(payload) {
@@ -53,8 +53,9 @@ function loadCourse(id) {
 /*
  * Perform a course search
  */
-function search(query) {
-    _courses = CourseAPI.findCourses(query);
+function search(searchString) {
+    _courses = CourseAPI.findCourses(searchString);
+    _searchString = searchString;
 }
 
 /*
@@ -67,8 +68,10 @@ function saveCourse(course) {
 /*
  * Deletes a course.
  */
-function deleteCourse(course) {
-    CourseAPI.deleteCourse(course);
+function deleteCourse(id) {
+    CourseAPI.deleteCourse(id);
+    //  Requery the search results since one of the items was deleted.
+    search(_searchString);
 }
 
 /*
@@ -83,6 +86,10 @@ var CourseStore = _.extend({}, EventEmitter.prototype, {
 
     getCourseSearchResults: function() {
         return _courses;
+    },
+
+    getSearchString: function() {
+        return _searchString;
     },
 
     // Emit Change event

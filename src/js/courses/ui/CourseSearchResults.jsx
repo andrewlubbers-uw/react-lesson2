@@ -30,30 +30,31 @@ var Row = React.createClass({
 var CourseSearchResults = React.createClass({
     /* The initial state of the component when it is mounted. */
     getInitialState: function() {
-        return({"sortColumn": "name"});
+        return {"sortColumn": "name"};
     },
 
     /* Handler for the clicks on a column header */
     handleSortClick: function(column) {
-        //  Calling setState causes the component to rerender.
-        this.setState({"sortColumn": column});
-        this.props.forceUpdate();
+        //  Resort if the column changed.
+        if (this.state.sortColumn !== column) {
+            this.setState({"sortColumn": column});
+        }
     },
 
     handleDeleteClick: function(id) {
-        var courses = this.props.courses;
         CourseActions.deleteCourse(id);
-        //this.props.forceUpdate();
     },
 
     /* Sort the given array of objects by the given property */
     _sort: function(data, prop) {
         //  Not React specific, but pass a comparator method to the Array sort function to sort on the given column.
         data.sort(function(o1, o2) {
-            if (o1[prop] > o2[prop]) {
+            var p1 = o1.props.courseModel[prop];
+            var p2 = o2.props.courseModel[prop];
+            if (p1 > p2) {
                 return 1;
             }
-            if (o1[prop] < o2[prop]) {
+            if (p1 < p2) {
                 return -1;
             }
             return 0;
@@ -62,28 +63,31 @@ var CourseSearchResults = React.createClass({
 
     render: function() {
         var sortColumn = this.state.sortColumn;
+        //  Make a copy of the course list and sort it.
         var courses = this.props.courses;
-        //  Do the sort
-        this._sort(courses, sortColumn);
 
         //  Create the rows for the table
         var self = this;
         var rows = courses.map(function(course, i) {
             return(<Row key={i} courseModel={course} deleteClickHandler={self.handleDeleteClick.bind(null, course.id)} />);
         });
-
+        //  Sort the rows
+        this._sort(rows, sortColumn);
+        
         return(
-          <table>
-            <thead>
-              <tr>
-                  <th onClick={this.handleSortClick.bind(this, "code")}>Code</th>
-                  <th onClick={this.handleSortClick.bind(this, "title")}>Title</th>
-                  <th>Credits</th>
-                  <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>{rows}</tbody>
-          </table>);
+            <div className="courseSearchResults">
+                <table>
+                    <thead>
+                        <tr>
+                            <th onClick={this.handleSortClick.bind(this, "code")}>Code</th>
+                            <th onClick={this.handleSortClick.bind(this, "title")}>Title</th>
+                            <th>Credits</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>{rows}</tbody>
+              </table>
+          </div>);
     }
 });
 
