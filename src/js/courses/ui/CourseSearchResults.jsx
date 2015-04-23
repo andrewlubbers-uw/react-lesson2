@@ -16,9 +16,9 @@ var Row = React.createClass({
                 <td title={courseModel.description}>{courseModel.title}</td>
                 <td>{courseModel.credits}</td>
                 <td>
-                    <span onClick={this.props.deleteClickHandler} title="Delete this course">X</span>
+                    <span onClick={this.props.deleteClickHandler} title="Delete this course">X </span>
                     <span> </span>
-                    <Link to="courseUpdate" params={{courseId: courseModel.id}} title="See course details">?</Link>
+                    <Link to="courseUpdate" params={{courseId: courseModel.id}} title="See course details"> U</Link>
                 </td>
             </tr>);
     }
@@ -30,7 +30,7 @@ var Row = React.createClass({
 var CourseSearchResults = React.createClass({
     /* The initial state of the component when it is mounted. */
     getInitialState: function() {
-        return {"sortColumn": "name"};
+        return {"sortColumn": "title"};
     },
 
     /* Handler for the clicks on a column header */
@@ -73,15 +73,15 @@ var CourseSearchResults = React.createClass({
         });
         //  Sort the rows
         this._sort(rows, sortColumn);
-        
+
         return(
             <div className="courseSearchResults">
                 <table>
                     <thead>
                         <tr>
-                            <th onClick={this.handleSortClick.bind(this, "code")}>Code</th>
+                            <th onClick={this.handleSortClick.bind(this, "subjectCode")}>Code</th>
                             <th onClick={this.handleSortClick.bind(this, "title")}>Title</th>
-                            <th>Credits</th>
+                            <th onClick={this.handleSortClick.bind(this, "credits")}>Credits</th>
                             <th>Actions</th>
                         </tr>
                     </thead>

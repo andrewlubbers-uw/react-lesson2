@@ -10,7 +10,7 @@ var CoursesSubnav = React.createClass({
             <div>
                 <div className="subnav">
                     <Link to="courseSearch">Search Courses</Link>
-                    <Link to="courseCreate">Create / Update Course</Link>
+                    <Link to="courseCreate">Create Course</Link>
                 </div>
                 <RouteHandler {...this.props} />
             </div>

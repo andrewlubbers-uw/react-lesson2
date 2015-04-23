@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require("react");
+var { Link } = require('react-router');
 var TextField = require("../../lib/ui/TextField");
 var Utils = require("../../lib/utils/Utils");
 var v = Utils.v;
@@ -61,6 +62,7 @@ var CourseCreateForm = React.createClass({
                 </fieldset>
                 <div className="">
                     <button type="submit">Submit</button>
+                    <Link to="courseSearch">Cancel</Link>
                 </div>
             </form>
         /*
