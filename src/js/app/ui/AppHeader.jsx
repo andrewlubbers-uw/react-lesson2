@@ -11,7 +11,7 @@ var AppHeader = React.createClass({
                 <h2>Our App</h2>
                 <ul>
                     <li><Link to="actions">Actions</Link></li>
-                    <li><Link to="courses">Courses</Link></li>
+                    <li><Link to="courseSearch">Courses</Link></li>
                 </ul>
             </div>
         );
